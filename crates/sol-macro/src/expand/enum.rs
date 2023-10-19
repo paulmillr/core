@@ -139,12 +139,8 @@ pub(super) fn expand(cx: &ExpCtxt<'_>, enumm: &ItemEnum) -> Result<TokenStream> 
                 type RustType = #name;
                 type TokenType<'a> = #uint8_st::TokenType<'a>;
 
+                const NAME: &'static str = #uint8_st::NAME;
                 const ENCODED_SIZE: ::core::option::Option<usize> = #uint8_st::ENCODED_SIZE;
-
-                #[inline]
-                fn sol_type_name() -> ::alloy_sol_types::private::Cow<'static, str> {
-                    #uint8_st::sol_type_name()
-                }
 
                 #[inline]
                 fn valid_token(token: &Self::TokenType<'_>) -> bool {

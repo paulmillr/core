@@ -21,6 +21,7 @@ rustdoc-args = ["--cfg", "docsrs"]
 alloy-primitives.workspace = true
 alloy-sol-macro.workspace = true
 
+const_format = "0.2.32"
 hex.workspace = true
 
 serde = { workspace = true, optional = true, features = ["derive"] }

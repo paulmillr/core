@@ -113,14 +113,21 @@ pub trait SolType: Sized {
     /// ABI encoding and decoding.
     type TokenType<'a>: TokenType<'a>;
 
+    /// The name of this type in Solidity.
+    const NAME: &'static str;
+
     /// The encoded size of the type, if known at compile time
     const ENCODED_SIZE: Option<usize> = Some(32);
 
     /// Whether the encoded size is dynamic.
     const DYNAMIC: bool = Self::ENCODED_SIZE.is_none();
 
-    /// Returns the name of this type in Solidity.
-    fn sol_type_name() -> Cow<'static, str>;
+    #[inline]
+    #[doc(hidden)]
+    #[deprecated(since = "0.4.3", note = "use `SolType::NAME` constant instead")]
+    fn sol_type_name() -> Cow<'static, str> {
+        Self::NAME.into()
+    }
 
     /// Calculate the ABI-encoded size of the data, counting both head and tail
     /// words. For a single-word type this will always be 32.

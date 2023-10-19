@@ -37,9 +37,6 @@ macro_rules! define_udt {
         }
 
         impl $name {
-            /// The Solidity type name.
-            pub const NAME: &'static str = stringify!($name);
-
             /// Convert from the underlying value type.
             #[inline]
             pub const fn from(value: <$underlying as $crate::SolType>::RustType) -> Self {
@@ -71,12 +68,8 @@ macro_rules! define_udt {
             type RustType = <$underlying as $crate::SolType>::RustType;
             type TokenType<'a> = <$underlying as $crate::SolType>::TokenType<'a>;
 
+            const NAME: &'static str = stringify!($name);
             const DYNAMIC: bool = false;
-
-            #[inline]
-            fn sol_type_name() -> $crate::private::Cow<'static, str> {
-                Self::NAME.into()
-            }
 
             #[inline]
             fn valid_token(token: &Self::TokenType<'_>) -> bool {

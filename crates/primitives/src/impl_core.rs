@@ -84,7 +84,7 @@ unsafe fn slice_assume_init_mut<T>(slice: &mut [MaybeUninit<T>]) -> &mut [T] {
 
 /// [`MaybeUninit::uninit_array`]
 #[inline]
-pub(crate) fn uninit_array<T, const N: usize>() -> [MaybeUninit<T>; N] {
+pub(crate) const fn uninit_array<T, const N: usize>() -> [MaybeUninit<T>; N] {
     // SAFETY: An uninitialized `[MaybeUninit<_>; N]` is valid.
     unsafe { MaybeUninit::<[MaybeUninit<T>; N]>::uninit().assume_init() }
 }

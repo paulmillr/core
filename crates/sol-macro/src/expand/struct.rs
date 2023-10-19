@@ -110,12 +110,7 @@ pub(super) fn expand(cx: &ExpCtxt<'_>, s: &ItemStruct) -> Result<TokenStream> {
                 type RustType = Self;
                 type TokenType<'a> = <UnderlyingSolTuple<'a> as ::alloy_sol_types::SolType>::TokenType<'a>;
 
-                #[inline]
-                fn sol_type_name() -> ::alloy_sol_types::private::Cow<'static, str> {
-                    ::alloy_sol_types::private::Cow::Borrowed(
-                        <Self as ::alloy_sol_types::SolStruct>::NAME
-                    )
-                }
+                const NAME: &'static str = #name_s;
 
                 #[inline]
                 fn valid_token(token: &Self::TokenType<'_>) -> bool {
@@ -131,8 +126,6 @@ pub(super) fn expand(cx: &ExpCtxt<'_>, s: &ItemStruct) -> Result<TokenStream> {
 
             #[automatically_derived]
             impl ::alloy_sol_types::SolStruct for #name {
-                const NAME: &'static str = #name_s;
-
                 #eip712_encode_type_fns
 
                 fn eip712_encode_data(&self) -> Vec<u8> {

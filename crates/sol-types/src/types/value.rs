@@ -5,7 +5,7 @@ use crate::{
     sol_data::{self, ByteCount, SupportedFixedBytes},
     Result, Word,
 };
-use alloc::{borrow::Cow, string::String, vec::Vec};
+use alloc::{string::String, vec::Vec};
 use alloy_primitives::{Address, Bytes, FixedBytes, Function, I256, U256};
 
 /// A Solidity value.
@@ -38,10 +38,10 @@ pub trait SolValue: SolTypeValue<Self::SolType> {
 
     /// The name of the associated Solidity type.
     ///
-    /// See [`SolType::sol_type_name`] for more information.
+    /// See [`SolType::NAME`] for more information.
     #[inline]
-    fn sol_type_name(&self) -> Cow<'static, str> {
-        Self::SolType::sol_type_name()
+    fn sol_type_name(&self) -> &'static str {
+        Self::SolType::NAME
     }
 
     /// Tokenizes the given value into this type's token.

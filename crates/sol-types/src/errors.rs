@@ -115,7 +115,7 @@ impl Error {
     /// Instantiates a new [`Error::TypeCheckFail`] with the provided token.
     #[cold]
     pub fn type_check_fail_token<T: crate::SolType>(token: &T::TokenType<'_>) -> Self {
-        Self::type_check_fail(&abi::encode(token), T::sol_type_name())
+        Self::type_check_fail(&abi::encode(token), T::NAME)
     }
 
     /// Instantiates a new [`Error::TypeCheckFail`] with the provided data.

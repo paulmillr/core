@@ -29,11 +29,6 @@ use alloy_primitives::{keccak256, B256};
 /// [`eip712_encode_type`]: SolStruct::eip712_encode_type
 /// [ref]: https://eips.ethereum.org/EIPS/eip-712#definition-of-encodetype
 pub trait SolStruct: SolType<RustType = Self> {
-    /// The struct name.
-    ///
-    /// Used in [`eip712_encode_type`][SolStruct::eip712_encode_type].
-    const NAME: &'static str;
-
     /// Returns component EIP-712 types. These types are used to construct
     /// the `encodeType` string. These are the types of the struct's fields,
     /// and should not include the root type.
